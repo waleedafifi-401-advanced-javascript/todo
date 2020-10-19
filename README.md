@@ -2,6 +2,10 @@
 
 **Author:** _Waleed A. Afifi_
 
+To Do List Manager Phase 2: Connecting the To Do Application to an external API and Database
+In this phase, we’ll be connecting our application to an API so that our list will be saved permanently. This will require a working and deployed API server with a proper “To Do” data model and appropriate REST routes
+
+
 ### Setup
 ```
 git clone https://github.com/waleedafifi-401-advanced-javascript/todo.git
@@ -26,5 +30,5 @@ npm test
 
 #### UML
 
-![UML](./src/whiteboard/uml.jpg)
+![UML](./src/whiteboard/uml2.jpg)
 
