@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import './todo.scss';
 
-// const todoAPI = 'https://amman-api-server.herokuapp.com/todo';
-const todoAPI = 'http://localhost:3001/todo';
+const todoAPI = 'https://amman-api-server.herokuapp.com/todo';
+// const todoAPI = 'http://localhost:3001/todo';
 
 const ToDo = () => {
 
