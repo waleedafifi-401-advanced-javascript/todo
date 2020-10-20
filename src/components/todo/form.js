@@ -51,7 +51,7 @@ export default (props) => {
               <Form.Control name="assignee" type="text" placeholder="Assignee Name" onChange={handleInputChange} />
             </Form.Group>
             <Form.Group controlId="formDifficultyRating">
-              <Form.Control defaultValue="3" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
+              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
             </Form.Group>
             <Button variant="primary" type="submit">Add Item</Button>
           </Card.Body>
