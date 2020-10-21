@@ -2,8 +2,10 @@
 
 **Author:** _Waleed A. Afifi_
 
-To Do List Manager Phase 3: Add some configuration settings to the application
-In this phase, we’ll be adding some top-level settings for the application, so that the user can make some display choices that the app will use by default.
+To Do List Manager Phase 4: Adding security and access controls to the application.
+
+In this final phase, we’ll be requiring that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+
 
 ### Setup
 ```
@@ -20,14 +22,17 @@ npm start
 #### How to use your library (where applicable)
 Add new items to the to-do list to see them pop up on the left. Click on items to watch the count go up and down and to see the style of the list items change.
 
-#### Tests
+### Online test
+Deployed URL: [Link]()
 
-There is one test that shows that typing in a new list item and clicking submit will render it to the screen.
-```
-npm test
-```
+**Users list**
+| **User** | **Password** | **Capabilities** |
+| -------- | ------------ | -------------- |
+| admin | ADMIN | (create, read, update, delete) |
+| editor | EDITOR | (create, read, update) |
+|user | USER | (read)|
 
 #### UML
 
-![UML](./src/whiteboard/uml3.jpg)
+![UML](./src/whiteboard/uml4.jpg)
 
