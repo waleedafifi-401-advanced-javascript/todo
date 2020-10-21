@@ -23,7 +23,7 @@ npm start
 Add new items to the to-do list to see them pop up on the left. Click on items to watch the count go up and down and to see the style of the list items change.
 
 ### Online test
-Deployed URL: [Link]()
+Deployed URL: [Link](https://u9d9j.csb.app/)
 
 **Users list**
 | **User** | **Password** | **Capabilities** |
