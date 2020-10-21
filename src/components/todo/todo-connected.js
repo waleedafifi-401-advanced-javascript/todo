@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
-
-import useAjax from '../../hooks/useAjax'
+import Auth from '../auth/auth';
+import useAjax from '../../hooks/useAjax';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import './todo.scss';
 
-// const todoAPI = 'https://amman-api-server.herokuapp.com/todo';
-const todoAPI = 'http://localhost:3001/todo';
+const todoAPI = 'https://amman-api-server.herokuapp.com/todo';
+// const todoAPI = 'http://localhost:3001/todo';
 
 const ToDo = () => {
 
@@ -28,9 +28,16 @@ const ToDo = () => {
     }
   };
 
+  const getList = useCallback(() => {
+    if (!list.length) {
+
+      apiCall(todoAPI,'GET')
+    }
+  }, [list, apiCall]);
+
   useEffect(() => {
-    apiCall(todoAPI, 'GET')
-  }, [apiCall]);
+    getList()
+  }, [getList]);
 
 
   // const [list, setList] = useState([]);
@@ -111,26 +118,32 @@ const ToDo = () => {
 
   return (
     <>
-    <Container fluid="true" style={{ margin: "20px 100px" }}>
-      <Row style={{marginBottom:"20px"}}>
-        <Col className="text-light bg-dark h2" style={{ padding: '20px' }}>
-          To Do List Manager ({list.filter(item => !item.complete).length})
-      </Col>
-      </Row >
+      <Container fluid="true" style={{ margin: "20px 100px" }}>
+        <Auth capability="read">
+          <Row style={{marginBottom:"20px"}}>
+            <Col className="text-light bg-dark h2" style={{ padding: '20px' }}>
+              To Do List Manager ({list.filter(item => !item.complete).length})
+            </Col>
+          </Row >
+        </Auth>
         <Row>
-          <Col md={3}>
-            <TodoForm handleSubmit={value => apiCall(todoAPI, 'POST', value)} />
-          </Col>
-          <Col md={5}>
-            <TodoList
-              list={list}
-              handleComplete={_toggleComplete}
-              handleDelete={id => apiCall(`${todoAPI}/${id}`, 'DELETE', id)}
-            />
-          </Col>
+          <Auth capability="create">
+            <Col md={3}>
+              <TodoForm handleSubmit={value => apiCall(todoAPI, 'POST', value)} />
+            </Col>
+          </Auth>
+          <Auth capability = "read">
+            <Col>
+              <TodoList
+                list={list}
+                handleComplete={_toggleComplete}
+                handleDelete={id => apiCall(`${todoAPI}/${id}`, 'DELETE', id)}
+              />
+            </Col>
+          </Auth>
         </Row>
-    </Container>
-  </>
+      </Container>
+    </>
   );
 };
 
