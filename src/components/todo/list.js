@@ -12,12 +12,15 @@ import Col from 'react-bootstrap/Col';
 import { SortContext } from '../../context/sort'
 import { CompleteContext } from '../../context/completed'
 import { NumPerScreenContext } from '../../context/pagenation'
+import { LoginContext } from '../auth/context';
+import Auth from '../auth/auth';
 
 export default (props) => {
 
   const sortContext = useContext(SortContext);
   const completeContext = useContext(CompleteContext);
   const numPerScreenContext = useContext(NumPerScreenContext);
+  const loginContext = useContext(LoginContext);
 
   const { numPer } = numPerScreenContext;
 
@@ -73,6 +76,7 @@ export default (props) => {
     await props.handleComplete(id);
   }
 
+  const badgeCursor = loginContext.can('update') ? 'pointer' : 'default';
 
   return (
     <>
@@ -105,14 +109,16 @@ export default (props) => {
                 onClose={() => props.handleDelete(item._id)} 
                 style={{position: 'relative'}}
               >
-                <Toast.Header>
-                  <Badge
-                    pill
-                    style={{marginRight: '15px', cursor: 'pointer'}}
-                    onClick={() => onComplete(item._id)}
-                    variant={item.complete ? 'danger' : 'success'}>
-                    {item.complete ? 'Complete' : 'Pending'}
-                  </Badge>
+                <Toast.Header closeButton={loginContext.can('delete')}>
+                  <Auth capabilty="update">
+                    <Badge
+                      pill
+                      style={{marginRight: '15px', cursor: badgeCursor}}
+                      onClick={() => loginContext.can('update') &&  onComplete(item._id)}
+                      variant={item.complete ? 'danger' : 'success'}>
+                      {item.complete ? 'Complete' : 'Pending'}
+                    </Badge>
+                  </Auth>
                   <strong className="mr-auto">{item.assignee}</strong>
                 </Toast.Header>
                 <Toast.Body>
